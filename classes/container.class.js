@@ -6,6 +6,7 @@ class Container {
    saveProduct(product){
     product.id = this.products.length > 0 ? this.products[this.products.length - 1].id + 1 : 1;    
     this.products.push(product)
+    console.log('Product id' ,product.id)
     return product.id;
   }
 
@@ -14,7 +15,9 @@ class Container {
   }
 
   getRandom() {
-
+    const random = Math.round(Math.random() * this.products.length);
+    console.log('random id', random)
+    return this.getById(random);
   }
 
   getById(id) {

@@ -10,10 +10,10 @@
       <h1>Bienvenidos a mi Backend</h1>
 
       <h3>Productos</h3>
-      <form action="/api/products" method="post">
-        <input type="text" name="id" placeholder="id">
-        <input type="text" name="name" id="name">
-        <input type="text" name="thumbnail" id="thumbnail">
+      <form action="/api/products" method="post" style="margin: auto; display:flex; flex-direction: column; width: 300px; gap: 20px;">
+        <input type="text" name="name" id="name" placeholder="Nombre del producto">
+        <input type="number" name="price" id="price" placeholder="Precio del producto">
+        <input type="text" name="thumbnail" id="thumbnail" placeholder="LInk a la imagen">
         <input type="submit" value="Guardar">
       </form>
 

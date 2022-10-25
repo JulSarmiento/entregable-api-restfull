@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../../middlewares/authMiddleware');
+const productExist = require('../../middlewares/authMiddleware');
 const Container = require('../../../classes/container.class');
 
 const db = [];
-
 const products = new Container(db);
 
 // get all route
@@ -17,9 +16,21 @@ router.get('/', (_req, res, next) => {
 
 });
 
-// pendeinte middleware de vazlidacion de producto existente o no
+// random route
+router.get('/randomProduct', (_req, res, next) => {
+  try {
+    res.status(200).json({
+      success: true,
+      data: products.getRandom()
+    })
+  }
+  catch(err) {
+    next(err);
+  }
+})
+
 // get by id route
-router.get('/:id',  (req, res, next) => {
+router.get('/:id', productExist(products) , (req, res, next) => {
   try{
     const {id} = req.params
     const selected = (products.getById(id));
@@ -34,11 +45,9 @@ router.get('/:id',  (req, res, next) => {
 });
 
 // save product route
-router.post('/', authMiddleware, (req, res, next) => {
+router.post('/', (req, res, next) => {
   try {
-    const { body } = req;
-    products.saveProduct(body);
-    console.log('body', body);
+    products.saveProduct(req.body);
     res.status(200).redirect('/public/index.html');
   }
   catch (err) {
@@ -47,7 +56,7 @@ router.post('/', authMiddleware, (req, res, next) => {
 });
 
 // update product route
-router.put('/:id', (req, res, next) => {
+router.put('/:id', productExist(products), (req, res, next) => {
   try {
     const {id} = req.params;
     // const {body} = req.body;
@@ -80,7 +89,7 @@ router.delete('/', (_req, res, next) => {
 });
 
 // delete by id route
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', productExist(products), (req, res, next) => {
   try{
     const {id} = req.params;
     const remainProducts = products.deleteById(id);    
