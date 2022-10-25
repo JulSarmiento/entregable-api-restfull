@@ -5,7 +5,6 @@ const notFoundErrorHandler = require('./src/middlewares/notFoundErrorHandler');
 
 const PORT = process.env.PORT || 3001;
 
-
 app.use(errorHandler);
 app.use(notFoundErrorHandler);
 

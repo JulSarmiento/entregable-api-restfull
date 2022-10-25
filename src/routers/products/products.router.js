@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const productExist = require('../../middlewares/authMiddleware');
+const productExist = require('../../middlewares/productExist');
 const Container = require('../../../classes/container.class');
 
 const db = [];

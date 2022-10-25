@@ -1,4 +1,5 @@
-function notFoundErrorHandler( _err, req, res, _next) {
+function notFoundErrorHandler( req, res, _next) {
+  console.log('entrando a notFound')
   res.status(400).json({
     succes: false,
     status: 'Not Found',
